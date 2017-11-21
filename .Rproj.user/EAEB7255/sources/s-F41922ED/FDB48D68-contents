@@ -27,7 +27,7 @@ all_tree_vars_orig <- read.csv("./Clean data/all_tree_Vars_unscaled_untrans.csv"
 
 #--------------------------------------------------------------------------------------------
 # tree-level models
-
+pimo_all_tree_vars <- all_tree_vars[all_tree_vars$Spp == "PIMO", ]
 #global model with tree-level vars and abiotic vars
 pimo_global <- lmer(formula = Delta_pdc ~ Neighbor_larger_log + ENN_dist_log + Diam_log + Height + BA_4m_log +  
                           cwd_normal_cum + fdsi_anom +
@@ -36,7 +36,7 @@ pimo_global <- lmer(formula = Delta_pdc ~ Neighbor_larger_log + ENN_dist_log + D
                           peak_tmax + min_ann_ppt +
                           Pndjfm + Avg_depth + AWC +
                           (1|Cluster/site), 
-                      data = all_tree_vars[all_tree_vars$Spp == "PIMO", ],
+                      data = pimo_all_tree_vars,
                     na.action = na.fail)
 
 #only use combos that aren't pairwise correlated
@@ -77,7 +77,7 @@ write.csv(pimo_dredge[1:10], "./model output/pimo_mod_selection_table.csv")
 
 # #----------------------------------------------
 # 
-
+juos_all_tree_vars <- all_tree_vars[all_tree_vars$Spp == "JUOS", ]
 #global model with tree-level vars and abiotic vars
 juos_global <- lmer(formula = Delta_pdc ~ Neighbor_larger_log + ENN_dist_log + Diam_log + Height + BA_4m_log +  
                       cwd_normal_cum + fdsi_anom +
@@ -86,7 +86,7 @@ juos_global <- lmer(formula = Delta_pdc ~ Neighbor_larger_log + ENN_dist_log + D
                       peak_tmax + min_ann_ppt +
                       Pndjfm + Avg_depth + AWC +
                       (1|Cluster/site), 
-                    data = all_tree_vars[all_tree_vars$Spp == "JUOS", ],
+                    data = juos_all_tree_vars,
                     na.action = na.fail)
 
 #only use combos that aren't pairwise correlated
@@ -129,7 +129,7 @@ pmort_global <- glmer(formula = Died ~ Neighbor_larger_log + ENN_dist_log + Diam
                         peak_tmax + min_ann_ppt +
                         Pndjfm + Avg_depth + AWC +
                       (1|site), family = "binomial",
-                      data = all_tree_vars[all_tree_vars$Spp == "PIMO", ], na.action = na.fail)
+                      data = pimo_all_tree_vars, na.action = na.fail)
 
 #only use combos that aren't pairwise correlated
 cormat <- abs(cor(all_tree_vars[all_tree_vars$Spp == "PIMO", c('Neighbor_larger_log', 'ENN_dist_log', 'Diam_log', 'Height', 'BA_4m_log', 

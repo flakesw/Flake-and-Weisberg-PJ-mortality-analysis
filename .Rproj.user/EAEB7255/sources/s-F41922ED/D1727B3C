@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1508964570081.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "D1727B3C",
+    "lastKnownWriteTime" : 1509035705,
+    "last_content_update" : 1509035705864,
+    "path" : "C:/Users/Sam/Google Drive/Projects/MS Thesis/Flake and Weisberg PJ mortality analysis/plot_level_analysis_for_paper_10177.R",
+    "project_path" : "plot_level_analysis_for_paper_10177.R",
+    "properties" : {
+        "cursorPosition" : "25,57",
+        "scrollLine" : "16"
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

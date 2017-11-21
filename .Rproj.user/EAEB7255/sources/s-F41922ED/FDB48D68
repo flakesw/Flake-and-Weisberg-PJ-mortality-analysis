@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1508960246093.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "FDB48D68",
+    "lastKnownWriteTime" : 1511280306,
+    "last_content_update" : 1511283609332,
+    "path" : "C:/Users/Sam/Google Drive/Projects/MS Thesis/Flake and Weisberg PJ mortality analysis/ind_tree_analysis_for_paper_102517.R",
+    "project_path" : "ind_tree_analysis_for_paper_102517.R",
+    "properties" : {
+        "cursorPosition" : "175,0",
+        "scrollLine" : "167"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

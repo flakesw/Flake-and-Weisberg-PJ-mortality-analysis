@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1511281263498.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1055539026",
+    "id" : "5BDFEBB1",
+    "lastKnownWriteTime" : 1511283269,
+    "last_content_update" : 1511283269513,
+    "path" : "C:/Users/Sam/Google Drive/Projects/MS Thesis/Flake and Weisberg PJ mortality analysis/pj_mortality_data_prep_112117.R",
+    "project_path" : "pj_mortality_data_prep_112117.R",
+    "properties" : {
+        "cursorPosition" : "6,0",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
