@@ -64,7 +64,7 @@ alldata <- join(alldata, soils[, c(1,7)], by = "site", type = "inner")
 
 write.csv(alldata, "./Clean data/plot_level_variables_all_columns.csv")
 
-alldata_reduced <- alldata[, -c(1, 5, 9:12, 13, 14, 17:22, 24:26, 30, 31, 32, 34, 35, 37, 39, 43, 44)]
+alldata_reduced <- alldata[, -c(1, 5, 9:12, 13, 14, 17:20, 24:27, 30, 31, 32, 34, 35, 37, 39, 43, 44)]
 
 write.csv(alldata_reduced, "./Clean data/plot_level_vars.csv")
 
