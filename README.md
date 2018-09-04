@@ -1,4 +1,5 @@
 # Flake-and-Weisberg-PJ-mortality-analysis
+https://zenodo.org/badge/111577553.svg
 Analysis by Sam Flake, swflake@ncsu.edu
 This code takes raw data, found in the folder "Raw Data," processes it into clean analyzable data, and generates all the figures used in the manuscript Flake, S.W., P.J. Weisberg. Accepted. Fine-scale stand structure mediates drought-induced tree mortality in pinyon-juniper woodlands. Ecological Applications.
 
