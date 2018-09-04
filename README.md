@@ -1,6 +1,12 @@
 # Flake-and-Weisberg-PJ-mortality-analysis
+
+
 https://zenodo.org/badge/111577553.svg
+
+
 Analysis by Sam Flake, swflake@ncsu.edu
+
+
 This code takes raw data, found in the folder "Raw Data," processes it into clean analyzable data, and generates all the figures used in the manuscript Flake, S.W., P.J. Weisberg. Accepted. Fine-scale stand structure mediates drought-induced tree mortality in pinyon-juniper woodlands. Ecological Applications.
 
 The first script that should be run is pj_mortality_data_prep_112117.R, which processes the raw data and populates the Clean Data folder. This script merges climate data, plot-level data, and tree-level data. Some plot-level variables (for example, basal area) are aggregated from tree-level data. 
