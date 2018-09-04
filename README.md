@@ -1,8 +1,6 @@
 # Flake-and-Weisberg-PJ-mortality-analysis
 
-
-https://zenodo.org/badge/111577553.svg
-
+<a href="https://zenodo.org/badge/latestdoi/111577553"><img src="https://zenodo.org/badge/111577553.svg" alt="DOI"></a>
 
 Analysis by Sam Flake, swflake@ncsu.edu
 
