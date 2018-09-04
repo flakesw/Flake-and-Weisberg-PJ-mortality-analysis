@@ -609,35 +609,35 @@ par <- pardefault
 # Does PDC predict mortality?
 
 p_mort <- readRDS("./model output/pimo_mort_model.RDS")
-summary(p_mort)
-plot(allEffects(p_mort))
-coefplot2::coefplot2(p_mort)
-AICc(p_mort)
-vif.mer(p_mort)
-r.squaredGLMM(p_mort)
+# summary(p_mort)
+# plot(allEffects(p_mort))
+# coefplot2::coefplot2(p_mort)
+# AICc(p_mort)
+# vif.mer(p_mort)
+# r.squaredGLMM(p_mort)
 
 
 # #only climate vars
 p_mort_clim <- glmer(Died ~
                        Avg_depth + cwd_normal_cum + fdsi_anom + (1| site), nAGQ = 1, family = "binomial",
                      data = all_tree_vars[all_tree_vars$Spp == "PIMO", ])
-summary(p_mort_clim)
-plot(allEffects(p_mort_clim))
-coefplot2::coefplot2(p_mort_clim)
-AICc(p_mort_clim)
-vif.mer(p_mort_clim)
-r.squaredGLMM(p_mort_clim)
+# summary(p_mort_clim)
+# plot(allEffects(p_mort_clim))
+# coefplot2::coefplot2(p_mort_clim)
+# AICc(p_mort_clim)
+# vif.mer(p_mort_clim)
+# r.squaredGLMM(p_mort_clim)
 
 #only stand structure vars
 p_mort_stand <- glmer(Died ~ ENN_dist + Neighbor_larger + BA_4m +
                         (1|Cluster/site), nAGQ = 1, family = "binomial",
                       data = all_tree_vars[all_tree_vars$Spp == "PIMO", ])
-summary(p_mort_stand)
-plot(allEffects(p_mort_stand))
-coefplot2::coefplot2(p_mort_stand)
-AICc(p_mort_stand)
-vif.mer(p_mort_stand)
-r.squaredGLMM(p_mort_stand)
+# summary(p_mort_stand)
+# plot(allEffects(p_mort_stand))
+# coefplot2::coefplot2(p_mort_stand)
+# AICc(p_mort_stand)
+# vif.mer(p_mort_stand)
+# r.squaredGLMM(p_mort_stand)
 
 
 
@@ -645,12 +645,12 @@ r.squaredGLMM(p_mort_stand)
 p_mort_tree <- glmer(Died ~ Height + Diam +
                        (1|Cluster/site), nAGQ = 1, family = "binomial",
                      data = all_tree_vars[all_tree_vars$Spp == "PIMO", ])
-summary(p_mort_tree)
-plot(allEffects(p_mort_tree))
-coefplot2::coefplot2(p_mort_tree)
-AICc(p_mort_tree)
-vif.mer(p_mort_tree)
-r.squaredGLMM(p_mort_tree)
+# summary(p_mort_tree)
+# plot(allEffects(p_mort_tree))
+# coefplot2::coefplot2(p_mort_tree)
+# AICc(p_mort_tree)
+# vif.mer(p_mort_tree)
+# r.squaredGLMM(p_mort_tree)
 
 
 
@@ -665,43 +665,43 @@ p_mort_int_mix <- glmer(Died ~ 1 + (1| site), nAGQ = 1, family = "binomial",
 ## Testing effect of different forms of PDC05 (percent dead crown in 2005)
 
 pdc_mort <- update(p_mort, . ~ . + PDC05)
-relgrad <- with(pdc_mort@optinfo$derivs,solve(Hessian,gradient))
-max(abs(relgrad))
-plot(allEffects(pdc_mort))
+# relgrad <- with(pdc_mort@optinfo$derivs,solve(Hessian,gradient))
+# max(abs(relgrad))
+# plot(allEffects(pdc_mort))
 
 pdc_mort_poly <- update(p_mort, . ~ . + poly(PDC05, 2))
-relgrad <- with(pdc_mort_poly@optinfo$derivs,solve(Hessian,gradient))
-max(abs(relgrad))
-plot(allEffects(pdc_mort_poly))
+# relgrad <- with(pdc_mort_poly@optinfo$derivs,solve(Hessian,gradient))
+# max(abs(relgrad))
+# plot(allEffects(pdc_mort_poly))
 
 pdc_mort_exp <- update(p_mort, . ~ . + exp(PDC05))
-relgrad <- with(pdc_mort_exp@optinfo$derivs,solve(Hessian,gradient))
-max(abs(relgrad))
+# relgrad <- with(pdc_mort_exp@optinfo$derivs,solve(Hessian,gradient))
+# max(abs(relgrad))
 
 
 ## Model comparisons
-AICc(p_mort)
-AICc(p_mort_clim)
-AICc(p_mort_stand)
-AICc(p_mort_tree)
-AICc(p_mort_int)
-AICc(p_mort_int_mix)
-
-AICc(pdc_mort)
-AICc(pdc_mort_poly)
-AICc(pdc_mort_exp)
-
-r.squaredGLMM(p_mort)
-r.squaredGLMM(p_mort_clim)
-r.squaredGLMM(p_mort_stand)
-r.squaredGLMM(p_mort_tree)
-pR2(p_mort_int)
-r.squaredGLMM(p_mort_int_mix)
-
-
-r.squaredGLMM(pdc_mort)
-r.squaredGLMM(pdc_mort_poly)
-r.squaredGLMM(pdc_mort_exp)
+# AICc(p_mort)
+# AICc(p_mort_clim)
+# AICc(p_mort_stand)
+# AICc(p_mort_tree)
+# AICc(p_mort_int)
+# AICc(p_mort_int_mix)
+# 
+# AICc(pdc_mort)
+# AICc(pdc_mort_poly)
+# AICc(pdc_mort_exp)
+# 
+# r.squaredGLMM(p_mort)
+# r.squaredGLMM(p_mort_clim)
+# r.squaredGLMM(p_mort_stand)
+# r.squaredGLMM(p_mort_tree)
+# pR2(p_mort_int)
+# r.squaredGLMM(p_mort_int_mix)
+# 
+# 
+# r.squaredGLMM(pdc_mort)
+# r.squaredGLMM(pdc_mort_poly)
+# r.squaredGLMM(pdc_mort_exp)
 
 ######################################################
 # Figure S1
@@ -894,11 +894,11 @@ dev.off()
 
 
 #-----------------------------------------------------------------
-# Figure 1 -- FDSI chart
+# Figure 1 -- FDSI timeseries
 #----------------------------------------------------------------
 library(Hmisc)
 
-fdsi_ann <- read.csv("./Raw data/fdsi_annual_timeseries.csv") 
+fdsi <- read.csv("./Raw data/fdsi_annual_timeseries.csv") 
 
 tiff(filename="./plots/figure 1 fdsi_series_lines.tif", 
      type = "cairo",
