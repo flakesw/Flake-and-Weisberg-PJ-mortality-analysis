@@ -7,17 +7,21 @@ source("pj_mortality_functions_090617.R")
 
 set.seed(665224291)
 
-all_tree_vars <- read.csv("./Clean data/all_tree_Vars_scaled_and_transformed.csv")
 all_tree_vars_orig <- read.csv("./Clean data/all_tree_Vars_unscaled_untrans.csv")
+all_tree_vars <- read.csv("./Clean data/all_tree_Vars_scaled_and_transformed.csv")
+pimo_all_tree_vars <- all_tree_vars[all_tree_vars$Spp == "PIMO", ]
+
 
 
 
 ###############################################################
-#### Generate figure 5
+#### Generate figure 6 -- effect of defoliation on mortality
 ###############################################################
+
 bootstrap_pmort <- readRDS("./model output/bootstrap_pmort.rds")
-
+p_mort <- readRDS("./model output/pimo_mort_model.rds")
 pdc_mort_poly <- update(p_mort, . ~ . + poly(PDC05, 2))
+
 
 ####partial effect plot of 2005 PDC on mortality risk 2005-2015
 
@@ -35,7 +39,7 @@ up <- exp(unlist(mort_eff$fit) + (mort_eff$se))
 low <- exp(unlist(mort_eff$fit) - (mort_eff$se))
 y <- exp(unlist(mort_eff$fit))
 
-tiff(filename="./plots/Figure_4_pdc_mort_effects.tif", 
+tiff(filename="./plots/Figure_6_pdc_mort_effects.tif", 
      type = "cairo",
      antialias = "gray",
      compression = "lzw",
@@ -73,9 +77,9 @@ dev.off()
 
 
 #------------------------------------------------------------
-## Plots for bootstraps of variable values
+###Generate Figure 5 -- Plots for bootstraps of variable values
 #-------------------------------------------------
-#Generate Figure 3
+
 
 bootstrap_pimo_int <- readRDS("./model output/bootstrap_pimo_int.rds")
 bootstrap_juos <- readRDS("./model output/bootstrap_juos.rds")
@@ -105,7 +109,7 @@ opar <- par(no.readonly = TRUE)
 
 par(opar)
 
-tiff(filename="./plots/Figure_3_coefficient_density_plots.tif", 
+tiff(filename="./plots/Figure_5_coefficient_density_plots.tif", 
      type = "cairo",
      antialias = "gray",
      compression = "lzw",
@@ -150,10 +154,10 @@ for (i in 1:length(var_names)){
          bty = 'n',
          xlab = "",
          ylab = "")
-    lines(d_p, col = "grey50") #pinyon in darker grey
-    polygon(d_p, col = addTrans("grey50", 90))
-    lines(d_j, col = "grey90", new = FALSE) #juniper in lighter grey
-    polygon(d_j, col = addTrans("grey90", 60))
+    lines(d_p, col = "#7570b3", lwd = 1.5) #pinyon in green
+    polygon(d_p, col = addTrans("#7570b3", 50), border = NA)
+    lines(d_j, col = "#d95f02", new = FALSE, lwd = 1.5) #juniper in orange
+    polygon(d_j, col = addTrans("#d95f02", 50), border = NA)
     axis(1)
     
     #label the row with the i'th value of the var_names vector
@@ -173,8 +177,8 @@ for (i in 1:length(var_names)){
          bty = 'n',
          xlab = "",
          ylab = "")
-    lines(d_pm, col = "blue")
-    polygon(d_pm, col = addTrans("grey50", 90))
+    lines(d_pm, col = "#7570b3", lwd = 1.5)
+    polygon(d_pm, col = addTrans("#7570b3", 50), border = NA)
     axis(1)
     
     mtext("Pinyon mortality", side = 3, cex = 0.9) #label for right column
@@ -194,10 +198,10 @@ for (i in 1:length(var_names)){
          bty = 'n',
          xlab = "",
          ylab = "")
-    lines(d_p, col = "black")
-    polygon(d_p, col = addTrans("grey50", 90))
-    lines(d_j, col = "black", new = FALSE)
-    polygon(d_j, col = addTrans("grey90", 60))
+    lines(d_p, col = "#7570b3", lwd = 1.5)
+    polygon(d_p, col = addTrans("#7570b3", 50), border = NA)
+    lines(d_j, col = "#d95f02", new = FALSE, lwd = 1.5)
+    polygon(d_j, col = addTrans("#d95f02", 50), border = NA)
     axis(1, labels = FALSE)
     # axis(2)
     abline(v = 0, lwd = 2, lty = 2)
@@ -219,8 +223,8 @@ for (i in 1:length(var_names)){
          bty = 'n',
          xlab = "",
          ylab = "")
-    lines(d_pm, col = "blue")
-    polygon(d_pm, col = addTrans("grey50", 90))
+    lines(d_pm, col = "#7570b3", lwd = 1.5)
+    polygon(d_pm, col = addTrans("#7570b3", 50), border = NA)
     axis(1, at = c(-1, 0, 1, 2), labels = FALSE)
     
     abline(v = 0, lwd = 2, lty = 2)
@@ -239,8 +243,8 @@ for (i in 1:length(var_names)){
          bty = 'n',
          xlab = "",
          ylab = "")
-    lines(d_p, col = "black")
-    polygon(d_p, col = addTrans("grey50", 90))
+    lines(d_p, col = "#7570b3", lwd = 1.5)
+    polygon(d_p, col = addTrans("#7570b3", 50), border = NA)
     axis(1, labels = FALSE)
     abline(v = 0, lwd = 2, lty = 2)
     
@@ -262,8 +266,8 @@ for (i in 1:length(var_names)){
          bty = 'n',
          xlab = "",
          ylab = "")
-    lines(d_j, col = "black")
-    polygon(d_j, col = addTrans("grey90", 60))
+    lines(d_j, col = "#d95f02", lwd = 1.5)
+    polygon(d_j, col = addTrans("#d95f02", 50), border = NA)
     axis(1, labels = FALSE)
     abline(v = 0, lwd = 2, lty = 2)
     
@@ -326,10 +330,10 @@ cwd_normal_cum_sd<- sd(all_tree_vars_unscaled[all_tree_vars_unscaled$Spp == "PIM
 
 #open device
 
-tiff(filename="./plots/Figure 2 interaction plots.tif",
+tiff(filename="./plots/Figure 4 interaction plots.tif",
      type="cairo",
      units="in",
-     width = 6,
+     width = 4,
      height = 6,
      pointsize=15,
      res=600,
@@ -831,13 +835,13 @@ plot_data$BA.Plot <- plot_data$BA.Plot * 10
 tiff(filename="./plots/Figure 3 plot-level mortality.tif",
      type="cairo",
      units="in",
-     width = 4,
-     height = 6,
-     pointsize=15,
+     width = 3,
+     height = 4.5,
+     pointsize=13,
      res=600,
      compression = "lzw")
 
-par(mar = c(3,.5,1.2,0), oma = c(2,4,1,1), family = "serif", bty = 'n', 
+par(mar = c(3,.5,1.2,0), oma = c(1,2.3,1,1), family = "serif", bty = 'n', 
         cex = 0.7, cex.lab = 0.6, cex.axis = 0.6, mfrow = c(2,1))
 
 #Proportion of trees that died ~ plot basal area
@@ -887,3 +891,177 @@ mtext(side = 1, text = "Climatic water deficit (mm)", cex = 0.7, outer = FALSE, 
 
 
 dev.off()
+
+
+#-----------------------------------------------------------------
+# Figure 1 -- FDSI chart
+#----------------------------------------------------------------
+library(Hmisc)
+
+fdsi_ann <- read.csv("./Raw data/fdsi_annual_timeseries.csv") 
+
+tiff(filename="./plots/figure 1 fdsi_series_lines.tif", 
+     type = "cairo",
+     antialias = "gray",
+     compression = "lzw",
+     units="in", 
+     width=4, 
+     height=2, 
+     pointsize=9, 
+     res=600)
+
+par(mar = c(4,4,1.4,0.7))
+
+q05 <- function(x){return(quantile(x, .05))}
+q95 <- function(x){return(quantile(x, .95))}
+
+fdsi_medians <- aggregate(fdsi$fdsi, by = list(fdsi$year), FUN = median)
+fdsi_upper <- aggregate(fdsi$fdsi, by = list(fdsi$year), FUN = q95)
+fdsi_lower <- aggregate(fdsi$fdsi, by = list(fdsi$year), FUN = q05)
+
+plot(NA,
+     col = "grey10",
+     lty = 1,
+     lwd = 1.2,
+     type = "l",
+     xlim = c(1980,2014),
+     ylim = c(-2.5, 2.2),
+     xaxt = "n",
+     yaxt = "n",
+     xlab = "Year",
+     ylab = "Forest Drought Stress Index",
+     cex.lab = 1)
+
+lines(x ~ Group.1, data = fdsi_upper[fdsi_upper$Group.1 %in% c(1980:2015), ],
+      col = "grey70",
+      lty = 1,
+      lwd = 0.9,
+      type = "l")
+lines(x ~ Group.1, data = fdsi_lower[fdsi_lower$Group.1 %in% c(1980:2015), ],
+      col = "grey70",
+      lty = 1,
+      lwd = 0.9,
+      type = "l")
+
+polygon(c(fdsi_upper[fdsi_upper$Group.1 %in% c(1980:2015), ]$Group.1, rev(fdsi_lower[fdsi_lower$Group.1 %in% c(1980:2015), ]$Group.1)),
+        c(fdsi_upper[fdsi_upper$Group.1 %in% c(1980:2015), ]$x, rev(fdsi_lower[fdsi_upper$Group.1 %in% c(1980:2015), ]$x)),
+        col = addTrans("grey70", 70),
+        border = NA)
+
+lines(x ~ Group.1, data = fdsi_medians[fdsi_medians$Group.1 %in% c(1980:2015), ])
+
+axis(1, cex.axis = 0.9)
+axis(2, cex.axis = 0.9)
+
+
+minor.tick(nx = 4)
+abline(h = 0, lty = 2, lwd = 1.2)
+abline(h = -1.41, lty = 4, lwd = 0.9, col = "grey20")
+# abline(v = c(1985, 1990, 1995, 2000, 2005, 2010, 2015), lty = 1, lwd = .3, col = "grey80")
+
+
+
+dev.off()
+
+
+
+
+
+
+#-----------------------------------------------------
+## Figure 2 -- mortality agent venn diagram
+#-----------------------------------------------------
+
+library("VennDiagram")
+library("vioplot")
+opar <- par(no.readonly = TRUE)
+
+
+plot_vars <- read.csv("./Raw data/all_vars_EXPORT.csv")
+greenwood_trees <- read.csv("./Raw data/Individual_TreeData_AllData_SF_edits.csv")
+greenwood_trees$Unique_tree <- paste0(greenwood_trees$Plot, greenwood_trees$Number)
+trees <- read.csv("./Raw data/all_trees_with_delta_and_ENN_041916.csv")
+
+## Calculate infestation by particular mortality agents
+trees$ips <- ifelse(trees$MortalityCause1 =="IPS" | trees$MortalityCause2 =="IPS" |trees$MortalityCause3 =="IPS" |
+                     trees$MortalityCause4 =="IPS" |trees$MortalityCause5 =="IPS", "Y", "N")
+trees[is.na(trees$ips), "ips"] <- "N"
+trees$rtb <- ifelse(trees$MortalityCause1 =="RTB" | trees$MortalityCause2 =="RTB" |trees$MortalityCause3 =="RTB" |
+                      trees$MortalityCause4 =="RTB" |trees$MortalityCause5 =="RTB", "Y", "N")
+trees[is.na(trees$rtb), "rtb"] <- "N"
+trees$ptb <- ifelse(trees$MortalityCause1 =="PTB" | trees$MortalityCause2 =="PTB" |trees$MortalityCause3 =="PTB" |
+                      trees$MortalityCause4 =="PTB" |trees$MortalityCause5 =="PTB", "Y", "N")
+trees[is.na(trees$ptb), "ptb"] <- "N"
+trees$pns <- ifelse(trees$MortalityCause1 =="PNS" | trees$MortalityCause2 =="PNS" |trees$MortalityCause3 =="PNS" |
+                      trees$MortalityCause4 =="PNS" |trees$MortalityCause5 =="PNS", "Y", "N")
+trees[is.na(trees$pns), "pns"] <- "N"
+trees$psf <- ifelse(trees$MortalityCause1 =="PSF" | trees$MortalityCause2 =="PSF" |trees$MortalityCause3 =="PSF" |
+                      trees$MortalityCause4 =="PSF" |trees$MortalityCause5 =="PSF", "Y", "N")
+trees[is.na(trees$psf), "psf"] <- "N"
+trees$ptm <- ifelse(trees$MortalityCause1 =="PTM" | trees$MortalityCause2 =="PTM" |trees$MortalityCause3 =="PTM" |
+                      trees$MortalityCause4 =="PTM" |trees$MortalityCause5 =="PTM", "Y", "N")
+trees[is.na(trees$ptm), "ptm"] <- "N"
+trees$pmb <- ifelse(trees$MortalityCause1 =="PMB" | trees$MortalityCause2 =="PMB" |trees$MortalityCause3 =="PMB" |
+                      trees$MortalityCause4 =="PMB" |trees$MortalityCause5 =="PMB", "Y", "N")
+trees[is.na(trees$pmb), "pmb"] <- "N"
+trees$mt <- ifelse(trees$MortalityCause1 =="MT" | trees$MortalityCause2 =="MT" |trees$MortalityCause3 =="MT" |
+                     trees$MortalityCause4 =="MT" |trees$MortalityCause5 =="MT" | trees$DMR>0, "Y", "N")
+trees[is.na(trees$mt), "mt"] <- "N" 
+
+trees$bb <- ifelse(trees$MortalityCause1 =="BB" | trees$MortalityCause2 =="BB" |trees$MortalityCause3 =="BB" |
+                     trees$MortalityCause4 =="BB" |trees$MortalityCause5 =="BB", "Y", "N")
+trees[is.na(trees$bb), "bb"] <- "N" 
+
+
+
+#####
+# Four set Venn Diagram
+
+A <- which((trees$Spp == "PIMO" & trees$Live  == "Y" & (trees$ips == "Y" | trees$rtb == "Y" | trees$pmb == "Y")))
+B <- which((trees$Spp == "PIMO" & trees$Live  == "Y" & (trees$ptb == "Y" | trees$ptm == "Y")))
+C <- which((trees$Spp == "PIMO" & trees$Live  == "Y" & (trees$pns == "Y" | trees$psf == "Y")))
+D <- which((trees$Spp == "PIMO" & trees$Live  == "Y" & (trees$mt == "Y")))
+# E <- sample(1:1000, 375, replace = FALSE);
+
+#number of trees with no mortality agents
+nrow(trees[trees$Spp =="PIMO" & trees$Live  == "Y"& trees$ips == "N" & trees$rtb == "N" & trees$pmb == "N" & trees$ptb == "N"
+           & trees$ptm == "N" & trees$pns == "N" & trees$psf == "N" & trees$mt == "N", ])
+
+nrow(trees[trees$Spp == "PIMO" & trees$Live  == "Y", ])
+
+length(A)
+length(B)
+length(C)
+length(D)
+venn.plot <- venn.diagram(
+  x = list(
+    "Bark (n = 903)" = A,
+    "MT (n = 320)" = D,
+    "Twig (n = 1173)" = B,
+    "Foli (n = 1178)"= C
+  ),
+  filename = "./plots/figure 2 mort_agent_venn.tiff",
+  col = "transparent",
+  fill = c("cornflowerblue", "green", "yellow", "darkorchid1"),
+  alpha = 0.4,
+  label.col = c("orange", "white", "darkorchid4", "white", 
+                "white", "white", "white", "white", "darkblue", "white", 
+                "white", "white", "white", "darkgreen", "white"),
+  cex = 1.5,
+  fontfamily = "serif",
+  fontface = "bold",
+  cat.col = c("darkblue", "darkgreen", "orange", "darkorchid4"),
+  cat.cex = 1.5,
+  cat.pos = 0,
+  cat.dist = 0.09,
+  cat.fontfamily = "serif",
+  rotation.degree = 270,
+  margin = 0,
+  height = 6,
+  width = 6,
+  resolution = 600,
+  imagetype = "tiff",
+  units = "in",
+  compression = "lzw",
+  antialias = "gray"
+)
