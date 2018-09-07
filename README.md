@@ -4,6 +4,15 @@
 
 Analysis by Sam Flake, swflake@ncsu.edu
 
+Abstract: 
+
+Severe drought has resulted in widespread tree die-off events in forests and woodlands globally and is forecast to become more frequent in coming decades. Tree mortality is a complex process influenced by climate, soils, characteristics of individual trees, interactions between trees, and the dynamics of pests and pathogens. The role of stand structure and stand density in mediating the resistance of trees to drought remains poorly understood, especially in semiarid woodlands, which are expected to be highly susceptible to future severe drought. We sampled permanent plots in central Nevada woodlands dominated by single-leaf pinyon pine and Utah juniper before and after a severe multi-year drought (2013-2015) to investigate the importance of climate, tree attributes, and local-neighborhood stand structure on tree mortality and canopy dieback at the level of individual trees and 0.1-ha plots.
+	
+  We observed widespread tree mortality of pinyon at approximately eight times the reported background mortality rate, and substantial canopy dieback in both pinyon and juniper. Both species were more prone to mortality and dieback in hotter, drier sites. Canopy dieback was associated with both long-term average climate and the severity of recent drought, with elevated mortality on sites with higher water deficits, average summer temperatures, and vapor pressure deficits. Soils also played a role in tree dieback, with greater mortality on deeper soils. 
+  
+  While mortality was driven largely by climate at coarse scales, fine-scale stand structure interacted with climate to mediate mortality and dieback. Neighborhood statistics showed that trees were susceptible to competitive influence, and pinyon trees were especially sensitive to neighborhood density on drier sites. Mortality and dieback were associated with diverse, co-occurring insect and parasitic plant mortality agents. Canopy dieback prior to the drought was strongly associated with tree mortality during the drought, implying that current widespread defoliation caused by these agents may foreshadow future elevated woodland decline. Fine-scale influences such as stand structure and soil characteristics play a key role in the long-term dynamics of semiarid woodlands, and these factors should be considered in predictive models of forest and woodland susceptibility to drought.
+
+Description of files:
 
 This code takes raw data, found in the folder "Raw Data," processes it into clean analyzable data, and generates all the figures used in the manuscript Flake, S.W., P.J. Weisberg. Accepted. Fine-scale stand structure mediates drought-induced tree mortality in pinyon-juniper woodlands. Ecological Applications.
 
